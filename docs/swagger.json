@@ -4,5 +4,1190 @@
         "contact": {},
         "license": {}
     },
-    "paths": {}
+    "paths": {
+        "/api/v1/application": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "请求相关"
+                ],
+                "summary": "查询请求",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "必填 页码",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "必填 页面大小",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 召集令 id",
+                        "name": "callup_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 请求者 id",
+                        "name": "callee_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 请求状态",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1ListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "请求相关"
+                ],
+                "summary": "新增请求",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1CreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "请求相关"
+                ],
+                "summary": "删除请求",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1DeleteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/application/{application_id}": {
+            "patch": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "请求相关"
+                ],
+                "summary": "更新请求",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "application_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1UpdateBodyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/application.ApplicationV1UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/callup": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "召集令相关"
+                ],
+                "summary": "查询召集令",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "必填 页码",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "必填 页面大小",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 令主id",
+                        "name": "caller_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 召集令类型",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "选填 召集令名称模糊搜索",
+                        "name": "fuzzy_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 召集令状态",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1ListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "召集令相关"
+                ],
+                "summary": "新增召集令",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1CreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "召集令相关"
+                ],
+                "summary": "删除召集令",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1DeleteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/callup/{callup_id}": {
+            "patch": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "召集令相关"
+                ],
+                "summary": "更新召集令",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "callup_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1UpdateBodyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/callup.CallupV1UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/income": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "其他"
+                ],
+                "summary": "查询中介收入",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.IncomeV1QueryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.IncomeV1QueryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "查询用户",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "必填 页码",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "必填 页面大小",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 用户类型",
+                        "name": "admin_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 用户级别",
+                        "name": "level",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 城市",
+                        "name": "city",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.UserV1ListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "新增用户",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.UserV1CreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.UserV1CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{user_id}": {
+            "patch": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户相关"
+                ],
+                "summary": "更新用户信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "request body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.UserV1UpdateBodyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.UserV1UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus401"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus404"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ErrorStatus500"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "application.ApplicationV1CreateRequest": {
+            "type": "object",
+            "properties": {
+                "callee_id": {
+                    "type": "integer"
+                },
+                "callup_id": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                }
+            }
+        },
+        "application.ApplicationV1CreateResponse": {
+            "type": "object",
+            "properties": {
+                "application_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "application.ApplicationV1DeleteRequest": {
+            "type": "object",
+            "properties": {
+                "application_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "application.ApplicationV1DeleteResponse": {
+            "type": "object"
+        },
+        "application.ApplicationV1ListResponse": {
+            "type": "object",
+            "properties": {
+                "application_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/callup.ApplicationStruct"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "application.ApplicationV1UpdateBodyRequest": {
+            "type": "object",
+            "properties": {
+                "desc": {
+                    "type": "string"
+                },
+                "is_canceled": {
+                    "type": "integer"
+                }
+            }
+        },
+        "application.ApplicationV1UpdateResponse": {
+            "type": "object"
+        },
+        "callup.ApplicationStruct": {
+            "type": "object",
+            "properties": {
+                "callee_id": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupStruct": {
+            "type": "object",
+            "properties": {
+                "application_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/callup.ApplicationStruct"
+                    }
+                },
+                "caller_id": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "photo_url": {
+                    "type": "string"
+                },
+                "quota": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "success_num": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1CreateRequest": {
+            "type": "object",
+            "properties": {
+                "caller_id": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "photo_url": {
+                    "type": "string"
+                },
+                "quota": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1CreateResponse": {
+            "type": "object",
+            "properties": {
+                "callup_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1DeleteRequest": {
+            "type": "object",
+            "properties": {
+                "callup_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1DeleteResponse": {
+            "type": "object"
+        },
+        "callup.CallupV1ListResponse": {
+            "type": "object",
+            "properties": {
+                "callup_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/callup.CallupStruct"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1UpdateBodyRequest": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "integer"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "integer"
+                },
+                "is_canceled": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "photo_url": {
+                    "type": "string"
+                },
+                "quota": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "callup.CallupV1UpdateResponse": {
+            "type": "object"
+        },
+        "handler.IncomeV1QueryRequest": {
+            "type": "object",
+            "properties": {
+                "begin_time": {
+                    "type": "integer"
+                },
+                "callup_type": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "integer"
+                },
+                "end_time": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handler.IncomeV1QueryResponse": {
+            "type": "object",
+            "properties": {
+                "month_map": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/handler.MonthData"
+                    }
+                },
+                "record_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/handler.RecordStruct"
+                    }
+                },
+                "total_income": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handler.MonthData": {
+            "type": "object",
+            "properties": {
+                "income": {
+                    "type": "integer"
+                },
+                "record_num": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handler.RecordStruct": {
+            "type": "object",
+            "properties": {
+                "application_id": {
+                    "type": "integer"
+                },
+                "callee_id": {
+                    "type": "integer"
+                },
+                "caller_id": {
+                    "type": "integer"
+                },
+                "callup_id": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "succeed_time": {
+                    "type": "integer"
+                }
+            }
+        },
+        "resp.ErrorStatus400": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "message": {
+                    "type": "string",
+                    "example": "参数错误"
+                }
+            }
+        },
+        "resp.ErrorStatus401": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 16
+                },
+                "message": {
+                    "type": "string",
+                    "example": "未授权"
+                }
+            }
+        },
+        "resp.ErrorStatus404": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 5
+                },
+                "message": {
+                    "type": "string",
+                    "example": "资源未找到"
+                }
+            }
+        },
+        "resp.ErrorStatus500": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "message": {
+                    "type": "string",
+                    "example": "服务器错误"
+                }
+            }
+        },
+        "user.UserStruct": {
+            "type": "object",
+            "properties": {
+                "admin_type": {
+                    "type": "integer"
+                },
+                "city": {
+                    "type": "integer"
+                },
+                "credential_number": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "level": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "sso_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserV1CreateRequest": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "integer"
+                },
+                "credential_number": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "sso_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserV1CreateResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "user.UserV1ListResponse": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer"
+                },
+                "user_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/user.UserStruct"
+                    }
+                }
+            }
+        },
+        "user.UserV1UpdateBodyRequest": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "integer"
+                },
+                "credential_number": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "sso_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.UserV1UpdateResponse": {
+            "type": "object"
+        }
+    }
 }

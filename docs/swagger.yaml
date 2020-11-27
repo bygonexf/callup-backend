@@ -1,5 +1,781 @@
+definitions:
+  application.ApplicationV1CreateRequest:
+    properties:
+      callee_id:
+        type: integer
+      callup_id:
+        type: integer
+      desc:
+        type: string
+    type: object
+  application.ApplicationV1CreateResponse:
+    properties:
+      application_id:
+        type: integer
+    type: object
+  application.ApplicationV1DeleteRequest:
+    properties:
+      application_id:
+        type: integer
+    type: object
+  application.ApplicationV1DeleteResponse:
+    type: object
+  application.ApplicationV1ListResponse:
+    properties:
+      application_list:
+        items:
+          $ref: '#/definitions/callup.ApplicationStruct'
+        type: array
+      total:
+        type: integer
+    type: object
+  application.ApplicationV1UpdateBodyRequest:
+    properties:
+      desc:
+        type: string
+      is_canceled:
+        type: integer
+    type: object
+  application.ApplicationV1UpdateResponse:
+    type: object
+  callup.ApplicationStruct:
+    properties:
+      callee_id:
+        type: integer
+      desc:
+        type: string
+      id:
+        type: integer
+      status:
+        type: integer
+    type: object
+  callup.CallupStruct:
+    properties:
+      application_list:
+        items:
+          $ref: '#/definitions/callup.ApplicationStruct'
+        type: array
+      caller_id:
+        type: integer
+      city:
+        type: integer
+      desc:
+        type: string
+      end_time:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      photo_url:
+        type: string
+      quota:
+        type: integer
+      status:
+        type: integer
+      success_num:
+        type: integer
+      type:
+        type: integer
+    type: object
+  callup.CallupV1CreateRequest:
+    properties:
+      caller_id:
+        type: integer
+      city:
+        type: integer
+      desc:
+        type: string
+      end_time:
+        type: integer
+      name:
+        type: string
+      photo_url:
+        type: string
+      quota:
+        type: integer
+      type:
+        type: integer
+    type: object
+  callup.CallupV1CreateResponse:
+    properties:
+      callup_id:
+        type: integer
+    type: object
+  callup.CallupV1DeleteRequest:
+    properties:
+      callup_id:
+        type: integer
+    type: object
+  callup.CallupV1DeleteResponse:
+    type: object
+  callup.CallupV1ListResponse:
+    properties:
+      callup_list:
+        items:
+          $ref: '#/definitions/callup.CallupStruct'
+        type: array
+      total:
+        type: integer
+    type: object
+  callup.CallupV1UpdateBodyRequest:
+    properties:
+      city:
+        type: integer
+      desc:
+        type: string
+      end_time:
+        type: integer
+      is_canceled:
+        type: integer
+      name:
+        type: string
+      photo_url:
+        type: string
+      quota:
+        type: integer
+      type:
+        type: integer
+    type: object
+  callup.CallupV1UpdateResponse:
+    type: object
+  handler.IncomeV1QueryRequest:
+    properties:
+      begin_time:
+        type: integer
+      callup_type:
+        type: integer
+      city:
+        type: integer
+      end_time:
+        type: integer
+    type: object
+  handler.IncomeV1QueryResponse:
+    properties:
+      month_map:
+        additionalProperties:
+          $ref: '#/definitions/handler.MonthData'
+        type: object
+      record_list:
+        items:
+          $ref: '#/definitions/handler.RecordStruct'
+        type: array
+      total_income:
+        type: integer
+    type: object
+  handler.MonthData:
+    properties:
+      income:
+        type: integer
+      record_num:
+        type: integer
+    type: object
+  handler.RecordStruct:
+    properties:
+      application_id:
+        type: integer
+      callee_id:
+        type: integer
+      caller_id:
+        type: integer
+      callup_id:
+        type: integer
+      id:
+        type: integer
+      succeed_time:
+        type: integer
+    type: object
+  resp.ErrorStatus400:
+    properties:
+      code:
+        example: 3
+        type: integer
+      message:
+        example: 参数错误
+        type: string
+    type: object
+  resp.ErrorStatus401:
+    properties:
+      code:
+        example: 16
+        type: integer
+      message:
+        example: 未授权
+        type: string
+    type: object
+  resp.ErrorStatus404:
+    properties:
+      code:
+        example: 5
+        type: integer
+      message:
+        example: 资源未找到
+        type: string
+    type: object
+  resp.ErrorStatus500:
+    properties:
+      code:
+        example: 10
+        type: integer
+      message:
+        example: 服务器错误
+        type: string
+    type: object
+  user.UserStruct:
+    properties:
+      admin_type:
+        type: integer
+      city:
+        type: integer
+      credential_number:
+        type: string
+      desc:
+        type: string
+      id:
+        type: integer
+      level:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      sso_name:
+        type: string
+    type: object
+  user.UserV1CreateRequest:
+    properties:
+      city:
+        type: integer
+      credential_number:
+        type: string
+      desc:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      sso_name:
+        type: string
+    type: object
+  user.UserV1CreateResponse:
+    properties:
+      id:
+        type: integer
+    type: object
+  user.UserV1ListResponse:
+    properties:
+      total:
+        type: integer
+      user_list:
+        items:
+          $ref: '#/definitions/user.UserStruct'
+        type: array
+    type: object
+  user.UserV1UpdateBodyRequest:
+    properties:
+      city:
+        type: integer
+      credential_number:
+        type: string
+      desc:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      sso_name:
+        type: string
+    type: object
+  user.UserV1UpdateResponse:
+    type: object
 info:
   contact: {}
   license: {}
-paths: {}
+paths:
+  /api/v1/application:
+    delete:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/application.ApplicationV1DeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ApplicationV1DeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 删除请求
+      tags:
+      - 请求相关
+    get:
+      parameters:
+      - description: 必填 页码
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: 必填 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: 选填 召集令 id
+        in: query
+        name: callup_id
+        type: integer
+      - description: 选填 请求者 id
+        in: query
+        name: callee_id
+        type: integer
+      - description: 选填 请求状态
+        in: query
+        name: status
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ApplicationV1ListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 查询请求
+      tags:
+      - 请求相关
+    post:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/application.ApplicationV1CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ApplicationV1CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 新增请求
+      tags:
+      - 请求相关
+  /api/v1/application/{application_id}:
+    patch:
+      parameters:
+      - description: id
+        in: path
+        name: application_id
+        required: true
+        type: integer
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/application.ApplicationV1UpdateBodyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ApplicationV1UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 更新请求
+      tags:
+      - 请求相关
+  /api/v1/callup:
+    delete:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/callup.CallupV1DeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/callup.CallupV1DeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 删除召集令
+      tags:
+      - 召集令相关
+    get:
+      parameters:
+      - description: 必填 页码
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: 必填 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: 选填 令主id
+        in: query
+        name: caller_id
+        type: integer
+      - description: 选填 召集令类型
+        in: query
+        name: type
+        type: integer
+      - description: 选填 召集令名称模糊搜索
+        in: query
+        name: fuzzy_name
+        type: string
+      - description: 选填 召集令状态
+        in: query
+        name: status
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/callup.CallupV1ListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 查询召集令
+      tags:
+      - 召集令相关
+    post:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/callup.CallupV1CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/callup.CallupV1CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 新增召集令
+      tags:
+      - 召集令相关
+  /api/v1/callup/{callup_id}:
+    patch:
+      parameters:
+      - description: id
+        in: path
+        name: callup_id
+        required: true
+        type: integer
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/callup.CallupV1UpdateBodyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/callup.CallupV1UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 更新召集令
+      tags:
+      - 召集令相关
+  /api/v1/income:
+    get:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/handler.IncomeV1QueryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.IncomeV1QueryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 查询中介收入
+      tags:
+      - 其他
+  /api/v1/user:
+    get:
+      parameters:
+      - description: 必填 页码
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: 必填 页面大小
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      - description: 选填 用户类型
+        in: query
+        name: admin_type
+        type: integer
+      - description: 选填 用户级别
+        in: query
+        name: level
+        type: integer
+      - description: 选填 城市
+        in: query
+        name: city
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserV1ListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 查询用户
+      tags:
+      - 用户相关
+    post:
+      parameters:
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserV1CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserV1CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 新增用户
+      tags:
+      - 用户相关
+  /api/v1/user/{user_id}:
+    patch:
+      parameters:
+      - description: id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: request body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserV1UpdateBodyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserV1UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus401'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/resp.ErrorStatus500'
+      summary: 更新用户信息
+      tags:
+      - 用户相关
 swagger: "2.0"

@@ -13,9 +13,6 @@ import (
 	"github.com/bygonexf/callup-backend/routers"
 )
 
-// local swagger url: http://127.0.0.1:6789/swagger/index.html
-
-// @description  ### swagger description
 func main() {
 	router := routers.InitRouter()
 	s := &http.Server{
