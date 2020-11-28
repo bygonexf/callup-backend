@@ -355,6 +355,10 @@ paths:
         in: query
         name: status
         type: integer
+      - description: 选填 申请 Id
+        in: query
+        name: application_id
+        type: integer
       produces:
       - application/json
       responses:
@@ -518,6 +522,10 @@ paths:
         in: query
         name: status
         type: integer
+      - description: 选填 召集令 id
+        in: query
+        name: callup_id
+        type: integer
       produces:
       - application/json
       responses:
@@ -677,6 +685,10 @@ paths:
       - description: 选填 城市
         in: query
         name: city
+        type: integer
+      - description: 选填 用户 id
+        in: query
+        name: user_id
         type: integer
       produces:
       - application/json

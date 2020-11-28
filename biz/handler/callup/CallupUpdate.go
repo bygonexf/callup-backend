@@ -20,7 +20,7 @@ func CallupV1Update(c *gin.Context) {
 }
 
 type CallupV1UpdateRequest struct {
-	CallupId string `uri:"callup_id" binding:"gt=0"` // 必填
+	CallupId int64 `uri:"callup_id" binding:"gt=0"` // 必填
 }
 
 type CallupV1UpdateBodyRequest struct {

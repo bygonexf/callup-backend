@@ -20,7 +20,7 @@ func ApplicationV1Update(c *gin.Context) {
 }
 
 type ApplicationV1UpdateRequest struct {
-	ApplicationId string `uri:"application_id" binding:"gt=0"` // 必填
+	ApplicationId int64 `uri:"application_id" binding:"gt=0"` // 必填
 }
 
 type ApplicationV1UpdateBodyRequest struct {

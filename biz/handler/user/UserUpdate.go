@@ -18,7 +18,7 @@ func UserV1Update(c *gin.Context) {
 }
 
 type UserV1UpdateRequest struct {
-	UserId string `uri:"user_id" binding:"gt=0"` // 必填
+	UserId int64 `uri:"user_id" binding:"gt=0"` // 必填
 }
 
 type UserV1UpdateBodyRequest struct {

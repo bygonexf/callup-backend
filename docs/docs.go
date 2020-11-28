@@ -66,6 +66,12 @@ var doc = `{
                         "description": "选填 请求状态",
                         "name": "status",
                         "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 申请 Id",
+                        "name": "application_id",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -313,6 +319,12 @@ var doc = `{
                         "type": "integer",
                         "description": "选填 召集令状态",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 召集令 id",
+                        "name": "callup_id",
                         "in": "query"
                     }
                 ],
@@ -609,6 +621,12 @@ var doc = `{
                         "type": "integer",
                         "description": "选填 城市",
                         "name": "city",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "选填 用户 id",
+                        "name": "user_id",
                         "in": "query"
                     }
                 ],

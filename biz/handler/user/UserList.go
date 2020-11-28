@@ -1,6 +1,8 @@
 package user
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 // @Summary 查询用户
 // @Tags 用户相关
@@ -10,6 +12,7 @@ import "github.com/gin-gonic/gin"
 // @Param admin_type				query int false "选填 用户类型"
 // @Param level						query int false "选填 用户级别"
 // @Param city						query int false "选填 城市"
+// @Param user_id					query int false "选填 用户 id"
 // @Success 200 {object} UserV1ListResponse
 // @Failure 400 {object} resp.ErrorStatus400
 // @Failure 401 {object} resp.ErrorStatus401
@@ -27,6 +30,7 @@ type UserV1ListRequest struct {
 	AdminType int32 `json:"admin_type"`
 	Level     int32 `json:"level"`
 	City      int32 `json:"city"`
+	UserId    int64 `json:"user_id"`
 }
 
 type UserV1ListResponse struct {

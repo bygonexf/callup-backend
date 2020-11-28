@@ -13,6 +13,7 @@ import (
 // @Param type						query int false "选填 召集令类型"
 // @Param fuzzy_name				query string false "选填 召集令名称模糊搜索"
 // @Param status					query int false "选填 召集令状态"
+// @Param callup_id					query int false "选填 召集令 id"
 // @Success 200 {object} CallupV1ListResponse
 // @Failure 400 {object} resp.ErrorStatus400
 // @Failure 401 {object} resp.ErrorStatus401
@@ -31,6 +32,7 @@ type CallupV1ListRequest struct {
 	Type      int32  `json:"type"`
 	FuzzyName string `json:"fuzzy_name"`
 	Status    int32  `json:"status"`
+	CallupId  int64  `json:"callup_id"`
 }
 
 type CallupV1ListResponse struct {
